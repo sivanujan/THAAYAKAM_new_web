@@ -33,6 +33,7 @@ const ORBIT_ICONS: OrbitIcon[] = [
   { src: "/icon/drupal_logo.svg", label: "Drupal", top: "33.2%", left: "19.3%", size: 36, cardSize: 50 },
   { src: "/icon/squarespace_logo.svg", label: "Squarespace", top: "45.7%", left: "83.7%", size: 32, cardSize: 50 },
   { src: "/icon/docker_logo.svg", label: "Docker", top: "50.3%", left: "15.9%", size: 36, cardSize: 50 },
+  { src: "/icon/Group 645.svg", label: "Terraform", top: "41.3%", left: "8.4%", size: 32, cardSize: 50 },
   { src: "/icon/figma_logo.svg", label: "Figma", top: "55.7%", left: "92.1%", size: 32, cardSize: 50 },
   { src: "/icon/flutter_logo.svg", label: "Flutter", top: "64.2%", left: "81.3%", size: 32, cardSize: 50 },
   { src: "/icon/aws_logo.svg", label: "AWS", top: "67.5%", left: "12.7%", size: 58, cardSize: 90 },
@@ -183,24 +184,84 @@ export function Hero() {
 
         {/* ---------- Right column — landing image 584x584 ---------- */}
         <div className="relative w-full max-w-[584px] mx-auto aspect-square select-none">
-          {/* Soft glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-brand-primary/10 blur-[120px] rounded-full pointer-events-none" />
+          {/* Soft outer glow */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full pointer-events-none z-0"
+            style={{ background: "rgba(21, 206, 255, 0.08)", filter: "blur(120px)" }}
+          />
 
           {/* Crossing dotted guidelines */}
-          <div className="absolute top-0 bottom-0 left-1/2 w-px border-l-2 border-dotted border-brand-primary/25 z-0 pointer-events-none" />
-          <div className="absolute left-0 right-0 top-1/2 h-px border-t-2 border-dotted border-brand-primary/25 z-0 pointer-events-none" />
+          <div
+            className="absolute top-0 bottom-0 left-1/2 w-px z-0 pointer-events-none"
+            style={{ borderLeft: "2px dotted rgba(21, 206, 255, 0.35)" }}
+          />
+          <div
+            className="absolute left-0 right-0 top-1/2 h-px z-0 pointer-events-none"
+            style={{ borderTop: "2px dotted rgba(21, 206, 255, 0.35)" }}
+          />
 
-          {/* Concentric dashed circles — matches Figma Ellipse 235/236/237 */}
-          <div className="absolute inset-0 border-2 border-dashed border-brand-primary/30 rounded-full animate-[spin-orbit_80s_linear_infinite] z-0" />
-          <div className="absolute inset-[7.5%] border-2 border-dashed border-brand-primary/25 rounded-full animate-[spin-orbit_60s_linear_infinite_reverse] z-0" />
-          <div className="absolute inset-[15%] border-2 border-dashed border-brand-primary/20 rounded-full animate-[spin-orbit_45s_linear_infinite] z-0" />
+          {/* Concentric dashed circles — SVG for pixel-perfect dashes, matches Figma Ellipse 235/236/237 */}
+          <svg
+            className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            {/* Outer ring — Ellipse 237 */}
+            <circle
+              cx="50"
+              cy="50"
+              r="49.5"
+              fill="none"
+              stroke="#15CEFF"
+              strokeOpacity="0.65"
+              strokeWidth="0.35"
+              strokeDasharray="1.2 1.2"
+              vectorEffect="non-scaling-stroke"
+            />
+            {/* Middle ring — Ellipse 236 */}
+            <circle
+              cx="50"
+              cy="50"
+              r="42.45"
+              fill="none"
+              stroke="#15CEFF"
+              strokeOpacity="0.55"
+              strokeWidth="0.35"
+              strokeDasharray="1.2 1.2"
+              vectorEffect="non-scaling-stroke"
+            />
+            {/* Inner ring — Ellipse 235 */}
+            <circle
+              cx="50"
+              cy="50"
+              r="34.9"
+              fill="none"
+              stroke="#15CEFF"
+              strokeOpacity="0.5"
+              strokeWidth="0.35"
+              strokeDasharray="1.2 1.2"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
 
-          {/* Central mockup image (254x162 centred) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[53%] aspect-[254/162] bg-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.12)] border border-gray-100 overflow-hidden">
+          {/* Hexagonal backdrop — sits inside the innermost circle, white fill with subtle shadow */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[66%] aspect-square"
+            style={{
+              clipPath:
+                "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+              background: "#ffffff",
+              filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.07))",
+            }}
+          />
+
+          {/* Central mockup image centred inside the hexagon */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[50%] aspect-[254/162] flex items-center justify-center">
             <img
               src="/icon/center.svg"
               alt="THAAYAKAM product mockup"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
 
